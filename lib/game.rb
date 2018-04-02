@@ -45,7 +45,7 @@ class Game
     draw? || won?
   end
 
-  def winner
+  def winner(board)
     if combo = won?
       board.cells[combo[0]]
     end
