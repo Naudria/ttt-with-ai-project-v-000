@@ -46,11 +46,12 @@ class Game
   end
 
 
-  def winner(board)
-  if won?(board) != nil
-    winner = board[won?(board)[0]]
+  def winner
+    if won?
+    winning_array = won?
+    board.cells[winning_array[0]]
+    end
   end
-end
 
 
   def turn
