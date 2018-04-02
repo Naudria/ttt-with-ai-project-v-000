@@ -32,48 +32,54 @@ class Game
 
 
   def won?
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
-  end
-  end
-
-  def draw?
-    @board.full? && !won?
-  end
-
-  def over?
-    draw? || won?
-  end
-
-  def winner
-    if combo = won?
-      @board.cells[combo[0]]
-    end
-  end
-
-
-  def turn
-    player = current_player
-    current_move = player.move(@board)
-      if @board.valid_move?(current_move)
-        puts "#{@board.turn_count+1}"
-        @board.display
-        @board.update(current_move, player)
-      else
-        turn
+        WIN_COMBINATIONS.detect do |win_combo|
+          if (@board[win_combo[0]]) == "X" && (@board[win_combo[1]]) == "X" && (@board[win_combo[2]]) == "X"
+            return win_combo
+          elsif (@board[win_combo[0]]) == "O" && (@board[win_combo[1]]) == "O" && (@board[win_combo[2]]) == "O"
+            return win_combo
+          end
+            false
+        end
       end
-  end
 
-  def play
-    while !over?
-      turn
+      #full?
+        def full?
+          @board.all?{|occupied| occupied != " "}
+        end
+
+        #draw
+        def draw?
+          !(won?) && (full?)
+        end
+
+        #over?
+        def over?
+          won? || full? || draw?
+        end
+
+        #winner?
+        def winner
+          WIN_COMBINATIONS.detect do |win_combo|
+            if (@board[win_combo[0]]) == "X" && (@board[win_combo[1]]) == "X" && (@board[win_combo[2]]) == "X"
+              return "X"
+            elsif (@board[win_combo[0]]) == "O" && (@board[win_combo[1]]) == "O" && (@board[win_combo[2]]) == "O"
+              return "O"
+            else
+              nil
+            end
+          end
+        end
+
+        #play
+        def play
+          while over? == false
+            turn
+          end
+          if won?
+            puts "Congratulations #{winner}!"
+          elsif draw?
+            puts "Cat's Game!"
+          end
+        end
+
     end
-    if won?
-      puts "Congratulations #{winner}!"
-    else
-      puts "Cat's Game!"
-    end
-
-  end
-
-end
