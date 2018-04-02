@@ -47,7 +47,7 @@ class Game
 
   def winner
     if win_combo = won?
-      board.cells[win_combo[0]]
+      return board.cells[win_combo[0]]
     end
   end
 
