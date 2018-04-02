@@ -46,11 +46,11 @@ class Game
   end
 
 
-  def winner
-    if winner_board = won?
-      @winner = @board.cells[winner_board.first]
-    end
+  def winner(board)
+  if won?(board) != nil
+    winner = board[won?(board)[0]]
   end
+end
 
 
   def turn
