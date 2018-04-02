@@ -19,32 +19,28 @@ class Game
   end
 
   def current_player
-      if board.turn_count % 2 == 0
-        player_1
-      else
-        player_2
-      end
-    end
-
-  def over?
-     won? || draw?
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
-
 
   def won?
-    WIN_COMBINATIONS.detect do |combo|
-      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[0]+1)
-  end
+    WIN_COMBINATIONS.detect do |win_combo|
+
+      position_1 = board.cells[win_combo[0]]
+      position_2 = board.cells[win_combo[1]]
+      position_3 = board.cells[win_combo[2]]
+
+      position_1 == position_2 && position_2 == position_3 &&
+      position_1 != " " ? true : false
+    end
   end
 
   def draw?
-    if !won? && board.full?
-      true
-    else
-      false
-    end
+    board.full? && !won?
   end
 
+  def over?
+    draw? || won?
+  end
 
   def winner
     if win_combo = won?
@@ -53,16 +49,27 @@ class Game
   end
 
   def turn
-    player = current_player
-    current_move = player.move(@board)
-      if @board.valid_move?(current_move)
-        puts "#{@board.turn_count+1}"
-        @board.display
-        @board.update(current_move, player)
-      else
-        turn
-      end
+    puts "#{current_player.token}, choose a space 1-9."
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      turn
+    end
   end
+
+  def again?
+    puts "Would you like to play again? Y/N."
+    play_again = gets.chomp
+    if play_again == "Y" || play_again == "y"
+      Game.new.start
+    else
+      puts "Goodbye!"
+    end
+  end
+
+
 
   def play
     while !over?
@@ -70,11 +77,9 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-    else
+      again?
+    elsif draw?
       puts "Cat's Game!"
+      again?
     end
-
   end
-
-
-end
