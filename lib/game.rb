@@ -32,15 +32,10 @@ class Game
 
 
   def won?
-        WIN_COMBINATIONS.detect do |win_combo|
-          if (@board[win_combo[0]]) == "X" && (@board[win_combo[1]]) == "X" && (@board[win_combo[2]]) == "X"
-            return win_combo
-          elsif (@board[win_combo[0]]) == "O" && (@board[win_combo[1]]) == "O" && (@board[win_combo[2]]) == "O"
-            return win_combo
-          end
-            false
-        end
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
+  end
+  end
 
   def draw?
     @board.full? && !won?
@@ -51,14 +46,8 @@ class Game
   end
 
   def winner
-    WIN_COMBINATIONS.detect do |win_combo|
-      if (@board[win_combo[0]]) == "X" && (@board[win_combo[1]]) == "X" && (@board[win_combo[2]]) == "X"
-        return "X"
-      elsif (@board[win_combo[0]]) == "O" && (@board[win_combo[1]]) == "O" && (@board[win_combo[2]]) == "O"
-        return "O"
-      else
-        nil
-      end
+    if combo = won?
+      @board.cells[combo[0]].
     end
   end
 
@@ -86,5 +75,6 @@ class Game
     end
 
   end
+
 
 end
