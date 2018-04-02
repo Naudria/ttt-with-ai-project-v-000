@@ -70,7 +70,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{@winner}!"
     else
       puts "Cat's Game!"
     end
