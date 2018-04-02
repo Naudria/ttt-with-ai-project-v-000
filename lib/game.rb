@@ -38,18 +38,16 @@ class Game
   end
 
   def draw?
-    if !won? && board.full?
-      true
-    else
-      false
-    end
+    board.full? && !won?
   end
 
+  def over?
+    draw? || won?
+  end
 
   def winner
-    if won?
-    winning_array = won?
-    board.cells[winning_array[0]]
+    if win_combo = won?
+      board.cells[win_combo[0]]
     end
   end
 
