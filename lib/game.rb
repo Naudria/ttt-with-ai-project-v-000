@@ -46,8 +46,8 @@ class Game
   end
 
   def winner
-    if combo = won?
-      board.cells[combo[0]]
+    if won? != nil
+      winner = @board[won?[0]]
     end
   end
 
