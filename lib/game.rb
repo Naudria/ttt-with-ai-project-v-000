@@ -69,7 +69,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner(board)}!"
     else
       puts "Cat's Game!"
     end
