@@ -2,18 +2,14 @@ class Board
   attr_accessor :cells
 
   def initialize
-    reset!
-  end
-
-  def cells
-    @cells
+    @cells = Array.new(9," ")
   end
 
   def reset!
-    self.cells=(Array.new(9, " "))
+    @cells = Array.new(9," ")
   end
 
-  def display #Prints the Board
+  def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
@@ -21,35 +17,35 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(position) #Takes in user input & returns the value of the board cell
-    index = input_to_index(position)
-    cells[index]
+  def position(input)
+    index = input.to_i
+    cells[index - 1]
   end
 
   def full?
-    cells.all? {|index| index == "X" || index == "O"}
+    @cells.all?{|token| token == "X" || token == "O"}
   end
 
-  def turn_count #Returns the amount of turns
-    cells.count {|cell| cell == "X" || cell == "O"}
+  def turn_count
+    count = 0
+    @cells.each do |spot|
+      if spot == "X" || spot == "O"
+        count +=1
+      end
+    end
+  count
   end
 
-  def taken?(num) #Returns false if the position is empty
-    num = num.to_i - 1 if num.class == String
-    !(cells[num].nil? || cells[num] == " ")
+  def taken?(input)
+  self.position(input) == "X" || self.position(input) == "O"
   end
 
-  def valid_move?(position) # returns true for 1-9 that is not taken
-    new_position = input_to_index(position)
-    new_position.between?(0,8) && !taken?(new_position)
+  def valid_move? (input)
+  input.to_i.between?(1,9) && !taken?(input)
   end
 
-  def update(position, player)
-    index = input_to_index(position)
-    cells[index] = player.token
-  end
-
-  def input_to_index(user_input)
-    user_input.to_i - 1
+  def update(input, player)
+      index = input.to_i - 1
+      @cells[index] = player.token
   end
 end
