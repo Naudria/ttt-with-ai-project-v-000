@@ -70,7 +70,7 @@ class Game
     while !over?
       turn
     end
-    if won?
+    if won?(winner)
       winner.detect[|i| i == "X" || i == "O"]
       puts "Congratulations #{winner}!"
     else
