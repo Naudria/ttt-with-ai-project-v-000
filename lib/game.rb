@@ -47,9 +47,10 @@ class Game
 
   def winner
     if win_combo = won?
-      return board.cells[win_combo[0]]
+      board.cells[win_combo[0]]
     end
   end
+
 
   def turn
     player = current_player
