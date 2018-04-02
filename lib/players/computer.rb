@@ -7,8 +7,10 @@ class Players::Computer < Player
     else
       return input = rand(1..9).to_s
     end
-  end
 
+
+
+  end
   def first_move
     input = ["1", "3", "5", "7", "9"].sample
   end
