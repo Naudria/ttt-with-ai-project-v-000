@@ -70,8 +70,8 @@ class Game
     while !over?
       turn
     end
-    if won?(winner)
-      winner.detect{|i| i == "X" || i == "O"}
+    
+    if won?
       puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
