@@ -48,7 +48,7 @@ class Game
 
   def winner
     if winning_board = won?
-    @winner = @board.cells[winning_board[0]]
+    winner = @board.cells[winning_board[0]]
     end
   end
 
@@ -70,7 +70,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{@winner}!"
+      puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
     end
