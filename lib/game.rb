@@ -49,7 +49,7 @@ class Game
   def winner
     if won?
     winning_array = won?
-    @board.cells[winning_array[0]]
+    @board.cells[winning_array.first]
     end
   end
 
