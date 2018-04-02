@@ -51,7 +51,6 @@ class Game
     end
   end
 
-
   def turn
     player = current_player
     current_move = player.move(@board)
