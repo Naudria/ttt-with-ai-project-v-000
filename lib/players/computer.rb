@@ -12,5 +12,5 @@ class Players::Computer < Player
   def first_move
     input = ["1", "3", "5", "7", "9"].sample
   end
-  
+
 end
