@@ -49,7 +49,7 @@ class Game
   def winner
     if won?
     winning_array = won?
-    board.cells[winning_array[0]]
+    @board.cells[winning_array[0]]
     end
   end
 
@@ -75,8 +75,5 @@ class Game
     else
       puts "Cat's Game!"
     end
-
   end
-
-
 end
