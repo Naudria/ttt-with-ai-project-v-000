@@ -45,9 +45,9 @@ class Game
     draw? || won?
   end
 
-  def winner(board)
+  def winner
     if combo = won?
-      board.cells[combo[0]]
+      board.cells[win_combo[0]]
     end
   end
 
@@ -69,7 +69,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner(board)}!"
+      puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
     end
