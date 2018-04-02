@@ -71,7 +71,7 @@ class Game
       turn
     end
     if won?(winner)
-      winner.detect[|i| i == "X" || i == "O"]
+      winner.detect{|i| i == "X" || i == "O"}
       puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
