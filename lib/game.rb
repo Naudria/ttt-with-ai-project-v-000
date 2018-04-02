@@ -47,12 +47,10 @@ class Game
 
 
   def winner
-    if won?
-    winning_array = won?
-    board.cells[winning_array[0]]
+    if win_combo = won?
+      board.cells[win_combo[0]]
     end
   end
-
 
   def turn
     player = current_player
@@ -70,7 +68,6 @@ class Game
     while !over?
       turn
     end
-    
     if won?
       puts "Congratulations #{winner}!"
     else
