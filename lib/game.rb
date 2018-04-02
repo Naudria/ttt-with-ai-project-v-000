@@ -45,18 +45,11 @@ class Game
     draw? || won?
   end
 
-  def winner(board)
-  if !won?(board)
-    return nil
-  else WIN_COMBINATIONS.each do |win_combo|
-    if check_win_combination?(board, 'X', win_combo)
-      return 'X'
-    elsif check_win_combination?(board, 'O', win_combo)
-      return 'O'
+  def winner
+    if win_combo = won?
+      return board.cells[win_combo[0]]
     end
   end
-end
-end
 
   def turn
     player = current_player
